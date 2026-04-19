@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body {
+    background-color: #AFEEEE;
+    color: #ddbc9d;
+    font-family: Arial;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 50px;
+    color: #ddbc9d;
+
+    /* black border + glow */
+    text-shadow:
+      -2px -2px 0 black,
+       2px -2px 0 black,
+      -2px  2px 0 black,
+       2px  2px 0 black,
+       0 0 10px #ddbc9d,
+       0 0 20px #ddbc9d;
+  }
+
+  button {
+    padding: 15px 30px;
+    font-size: 18px;
+    background: #ddbc9d;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ddbc9d, 0 0 20px #ddbc9d;
+    transition: 0.3s;
+  }
+
+  button:hover {
+    box-shadow: 0 0 20px #ddbc9d, 0 0 40px #ddbc9d;
+    transform: scale(1.1);
+  }
+
+  #message {
+    margin-top: 20px;
+    font-size: 20px;
+  }
+</style>
+</head>
+
+<body>
+
+<h1>Wassup Dawg</h1>
+<p>I know why you're here</p>
+
+<button onclick="changeText()">Click me</button>
+
+<p id="message"></p>
+
+<script>
+let messages = [
+  "I'm coming for you",
+  "Bro Imma touch you",
+  "Did you just click it again?",
+  "Auuughhh, stop touching me Kacchan",
+  "Ooouuuughhhh~"
+];
+
+function changeText() {
+  let randomIndex = Math.floor(Math.random() * messages.length);
+  document.getElementById("message").innerText = messages[randomIndex];
+}
+</script>
+
+</body>
+</html>
