@@ -3,24 +3,41 @@
 <head>
 <style>
   body {
-    background-color: #AFEEEE;
-    color: #ddbc9d;
+    margin: 0;
     font-family: Arial;
     text-align: center;
+    color: #004F98;
+
+    /* animated gradient background */
+    background: linear-gradient(-45deg, #ddbc9d, #1a001a, #000033, #ddbc9d);
+    background-size: 400% 400%;
+    animation: gradientMove 10s ease infinite;
+  }
+
+  @keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
   }
 
   h1 {
-    font-size: 50px;
-    color: #ddbc9d;
+    font-size: 60px;
+    margin-top: 50px;
 
-    /* black border + glow */
     text-shadow:
-      -2px -2px 0 black,
-       2px -2px 0 black,
-      -2px  2px 0 black,
-       2px  2px 0 black,
-       0 0 10px #ddbc9d,
-       0 0 20px #ddbc9d;
+      -2px -2px 0 #ddbc9d,
+       2px -2px 0 #ddbc9d,
+      -2px  2px 0 #ddbc9d,
+       2px  2px 0 #ddbc9d,
+       0 0 10px #004F98,
+       0 0 20px #004F98;
+
+    animation: flicker 2s infinite alternate;
+  }
+
+  @keyframes flicker {
+    0% { opacity: 1; }
+    100% { opacity: 0.7; }
   }
 
   button {
@@ -30,24 +47,67 @@
     color: white;
     border: none;
     border-radius: 10px;
+
     box-shadow: 0 0 10px #ddbc9d, 0 0 20px #ddbc9d;
     transition: 0.3s;
   }
 
   button:hover {
-    box-shadow: 0 0 20px #ddbc9d, 0 0 40px #ddbc9d;
-    transform: scale(1.1);
+    box-shadow: 0 0 25px #ddbc9d, 0 0 50px #ddbc9d;
+    transform: scale(1.15);
   }
 
   #message {
     margin-top: 20px;
     font-size: 20px;
   }
+
+  /* glowing floating circles */
+  .orb {
+    position: fixed;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle,#ddbc9d, transparent);
+    border-radius: 50%;
+    opacity: 0.3;
+    animation: float 10s infinite ease-in-out;
+  }
+
+  .orb:nth-child(1) { top: 10%; left: 20%; }
+  .orb:nth-child(2) { top: 50%; left: 70%; }
+  .orb:nth-child(3) { top: 80%; left: 40%; }
+
+  @keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-50px); }
+    100% { transform: translateY(0); }
+  }
+</style>
 </style>
 </head>
+<script>
+document.addEventListener("mousemove", function(e) {
+  let glow = document.createElement("div");
+  glow.style.position = "fixed";
+  glow.style.left = e.clientX + "px";
+  glow.style.top = e.clientY + "px";
+  glow.style.width = "10px";
+  glow.style.height = "10px";
+  glow.style.background = "#ddbc9d";
+  glow.style.borderRadius = "50%";
+  glow.style.pointerEvents = "none";
+  glow.style.boxShadow = "0 0 10px #ddbc9d, 0 0 20px #ddbc9d";
+  document.body.appendChild(glow);
 
+  setTimeout(() => {
+    glow.remove();
+  }, 300);
+});
+</script>
 <body>
-
+<div class="orb"></div>
+<div class="orb"></div>
+<div class="orb"></div>
 <h1>Wassup Dawg</h1>
 <p>I know why you're here</p>
 
@@ -61,7 +121,12 @@ let messages = [
   "Bro Imma touch you",
   "Did you just click it again?",
   "Auuughhh, stop touching me Kacchan",
-  "Ooouuuughhhh~"
+  "Ooouuuughhhh~",
+  "I’m a lone wolf, I walk my own path.",
+  "oi oi oi... baka",
+  "AWOOOOOOOOOOOOOO",
+  "rips t-shirt",
+  "I alone am the alpha wolf sigma male",
 ];
 
 function changeText() {
